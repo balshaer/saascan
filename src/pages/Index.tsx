@@ -4,13 +4,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-import useSaasAnalysis from "@/hooks/useSaasAnalysis";
+import useSingleAnalysis from "@/hooks/useSingleAnalysis";
 import HeroSection from "@/components/layout/HeroSection";
 import InputAnalysisSection from "@/components/layout/InputAnalysisSection";
 import EmptyStateSection from "@/components/layout/EmptyStateSection";
 import SkeletonLoader from "@/components/analysis/SkeletonLoader";
 import ProgressIndicator from "@/components/analysis/ProgressIndicator";
-import AnalysisDataTable from "@/components/AnalysisDataTable";
+import AnalysisResult from "@/components/analysis/AnalysisResult";
 
 // Animation variants for smooth transitions
 const fadeInUp = {
@@ -31,15 +31,16 @@ const staggerContainer = {
 const Index = () => {
   const [showOnboarding, setShowOnboarding] = useState(true);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
+
+  // New single analysis hook
   const {
     input,
     setInput,
     isAnalyzing,
-    results,
+    currentResult,
     handleAnalyze,
-    handleExport,
-    handleClear,
-  } = useSaasAnalysis("en");
+    clearResult,
+  } = useSingleAnalysis();
 
   // Handle first load animation
   useEffect(() => {
@@ -56,7 +57,7 @@ const Index = () => {
     }
   }, [input]);
 
-  const hasResults = results.length > 0;
+  const hasResult = currentResult !== null;
 
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
@@ -103,7 +104,7 @@ const Index = () => {
             </AnimatePresence>
 
             <AnimatePresence mode="wait">
-              {hasResults && !isAnalyzing && (
+              {hasResult && !isAnalyzing && currentResult && (
                 <motion.div
                   key="results"
                   variants={fadeInUp}
@@ -111,16 +112,14 @@ const Index = () => {
                   animate="animate"
                   exit="exit"
                 >
-                  <AnalysisDataTable
-                    results={results}
-                    language="en"
-                    onExport={handleExport}
-                    onClear={handleClear}
+                  <AnalysisResult
+                    result={currentResult}
+                    onClear={clearResult}
                   />
                 </motion.div>
               )}
 
-              {!hasResults && !isAnalyzing && !showOnboarding && (
+              {!hasResult && !isAnalyzing && !showOnboarding && (
                 <motion.div
                   key="empty"
                   variants={fadeInUp}

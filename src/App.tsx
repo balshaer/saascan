@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import HistoryPage from "./pages/HistoryPage";
+import History from "./pages/History";
 import Announcement from "./components/layout/Announcement";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { performanceMonitor } from "./lib/performance";
@@ -51,7 +51,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Index />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="/history" element={<HistoryPage />} />
+              <Route path="/history" element={<History />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
