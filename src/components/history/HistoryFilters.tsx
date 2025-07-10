@@ -5,7 +5,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 
 interface HistoryFiltersProps {
@@ -31,20 +37,21 @@ const HistoryFilters: React.FC<HistoryFiltersProps> = ({
   filters,
   onFiltersChange,
   totalResults,
-  className = ""
+  className = "",
 }) => {
   const handleScoreRangeChange = (values: number[]) => {
     onFiltersChange({
       ...filters,
       minScore: values[0],
-      maxScore: values[1]
+      maxScore: values[1],
     });
   };
 
   const handleInnovationLevelChange = (value: string) => {
     onFiltersChange({
       ...filters,
-      innovationLevel: value === "all" ? "" : value as "منخفض" | "متوسط" | "عالي"
+      innovationLevel:
+        value === "all" ? "" : (value as "منخفض" | "متوسط" | "عالي"),
     });
   };
 
@@ -53,8 +60,8 @@ const HistoryFilters: React.FC<HistoryFiltersProps> = ({
       ...filters,
       dateRange: {
         ...filters.dateRange,
-        [field]: value
-      }
+        [field]: value,
+      },
     });
   };
 
@@ -65,13 +72,13 @@ const HistoryFilters: React.FC<HistoryFiltersProps> = ({
       innovationLevel: "",
       dateRange: {
         start: "",
-        end: ""
-      }
+        end: "",
+      },
     });
     onSearchChange("");
   };
 
-  const hasActiveFilters = 
+  const hasActiveFilters =
     searchQuery.trim() !== "" ||
     filters.minScore !== 0 ||
     filters.maxScore !== 100 ||
@@ -89,16 +96,16 @@ const HistoryFilters: React.FC<HistoryFiltersProps> = ({
       <Card dir="rtl">
         <CardHeader className="pb-4">
           <div className="flex items-center justify-between">
-            <CardTitle className="text-lg font-bold text-gray-900 flex items-center gap-2">
+            <CardTitle className="text-lg font-bold  flex items-center gap-2">
               <Filter className="w-5 h-5 text-blue-600" />
               البحث والتصفية
             </CardTitle>
-            
+
             <div className="flex items-center gap-2">
               <span className="text-sm text-gray-600">
                 {totalResults} نتيجة
               </span>
-              
+
               {hasActiveFilters && (
                 <Button
                   variant="outline"
@@ -113,11 +120,14 @@ const HistoryFilters: React.FC<HistoryFiltersProps> = ({
             </div>
           </div>
         </CardHeader>
-        
+
         <CardContent className="space-y-6">
           {/* Search Input */}
           <div className="space-y-2">
-            <Label htmlFor="search" className="text-sm font-medium text-gray-700 flex items-center gap-2">
+            <Label
+              htmlFor="search"
+              className="text-sm font-medium text-gray-700 flex items-center gap-2"
+            >
               <Search className="w-4 h-4" />
               البحث في النصوص
             </Label>
@@ -182,7 +192,7 @@ const HistoryFilters: React.FC<HistoryFiltersProps> = ({
               <Calendar className="w-4 h-4" />
               نطاق التاريخ
             </Label>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div className="space-y-1">
                 <Label htmlFor="start-date" className="text-xs text-gray-600">
@@ -192,11 +202,13 @@ const HistoryFilters: React.FC<HistoryFiltersProps> = ({
                   id="start-date"
                   type="date"
                   value={filters.dateRange.start}
-                  onChange={(e) => handleDateRangeChange("start", e.target.value)}
+                  onChange={(e) =>
+                    handleDateRangeChange("start", e.target.value)
+                  }
                   className="w-full"
                 />
               </div>
-              
+
               <div className="space-y-1">
                 <Label htmlFor="end-date" className="text-xs text-gray-600">
                   إلى تاريخ
@@ -220,20 +232,23 @@ const HistoryFilters: React.FC<HistoryFiltersProps> = ({
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
             >
-              <h4 className="text-sm font-medium text-blue-900 mb-2">المرشحات النشطة:</h4>
+              <h4 className="text-sm font-medium text-blue-900 mb-2">
+                المرشحات النشطة:
+              </h4>
               <div className="space-y-1 text-xs text-blue-800">
-                {searchQuery.trim() && (
-                  <div>• البحث: "{searchQuery}"</div>
-                )}
+                {searchQuery.trim() && <div>• البحث: "{searchQuery}"</div>}
                 {(filters.minScore !== 0 || filters.maxScore !== 100) && (
-                  <div>• التقييم: {filters.minScore} - {filters.maxScore}</div>
+                  <div>
+                    • التقييم: {filters.minScore} - {filters.maxScore}
+                  </div>
                 )}
                 {filters.innovationLevel && (
                   <div>• مستوى الابتكار: {filters.innovationLevel}</div>
                 )}
                 {(filters.dateRange.start || filters.dateRange.end) && (
                   <div>
-                    • التاريخ: {filters.dateRange.start || "غير محدد"} إلى {filters.dateRange.end || "غير محدد"}
+                    • التاريخ: {filters.dateRange.start || "غير محدد"} إلى{" "}
+                    {filters.dateRange.end || "غير محدد"}
                   </div>
                 )}
               </div>

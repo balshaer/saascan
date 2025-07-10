@@ -27,6 +27,11 @@ All colors MUST be HSL.
   --headline: #dfdfd6;
   --paragraph: #98989f;
   --button: #3e63dd;
+  --button-text: #ffff;
+  --button-hover: #002cbd;
+  --button-secondary: #32363f;
+  --button-secondary-text: #dfdfd6;
+  --button-secondary-hover: #414853;
   --button-text: #fffffe;
   --stroke: #010101;
   --main: #fffffe;
@@ -36,6 +41,14 @@ All colors MUST be HSL.
   --card: #202127;
   --card-border: #fcfcfc34;
   --border: #fcfcfc34;
+  --card-headline: #dfdfd6;
+  --card-paragraph: #98989f;
+  --card-button: #3e63dd;
+  --card-button-text: #fffffe;
+  --card-stroke: #010101;
+  --card-main: #fffffe;
+  --card-highlight: #7f5af0;
+  --highlight: #7f5af0;
 }
 
 body {

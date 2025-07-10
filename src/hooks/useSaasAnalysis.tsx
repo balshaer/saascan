@@ -121,7 +121,7 @@ const useSaasAnalysis = (language: string) => {
         trackUserAction("analysis_completed_mock");
 
         toast({
-          title: "Analysis Complete",
+          title: "Analysis Complete 🎉",
           description: "Your SaaS idea has been analyzed successfully",
         });
         return;
@@ -229,7 +229,7 @@ const useSaasAnalysis = (language: string) => {
       });
 
       toast({
-        title: "Analysis Complete",
+        title: "Analysis Complete 🎉",
         description: "Your SaaS idea has been analyzed with detailed insights",
       });
     } catch (error) {

@@ -13,12 +13,11 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className }) => {
   const isDark = themeMode === "dark";
 
   return (
-    <Button
+    <button
       onClick={toggleTheme}
       role="button"
       tabIndex={0}
-      variant="icon"
-      size="icon"
+      
       aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
       title={`Switch to ${isDark ? "light" : "dark"} mode`}
       className={className}
@@ -29,8 +28,14 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className }) => {
         }
       }}
     >
-      <Expand toggled={isDark} duration={750} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
-    </Button>
+      <Expand
+        toggled={isDark}
+        duration={750}
+        placeholder={undefined}
+        onPointerEnterCapture={undefined}
+        onPointerLeaveCapture={undefined}
+      />
+    </button>
   );
 };
 

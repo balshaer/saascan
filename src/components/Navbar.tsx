@@ -54,7 +54,7 @@ const Navbar = () => {
             </Link>
           </div>
 
-          <ThemeToggle />
+          <ThemeToggle className="inline-flex items-center justify-center gap-2 whitespace-nowrap  text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-[var(--card)] border border-[var(--card-border)] text-[var(--paragraph)] hover:text-[var(--headline)] hoverd p-2" />
 
           <div className="md:hidden">
             <select

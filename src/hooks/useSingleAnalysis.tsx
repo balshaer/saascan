@@ -11,13 +11,15 @@ import {
 import { getGeminiApiKey, getApiConfig } from "@/lib/config";
 
 // Mock data for fallback analysis (English version)
-const generateMockAnalysis = (originalIdea: string): HorizontalAnalysisResult => {
+const generateMockAnalysis = (
+  originalIdea: string
+): HorizontalAnalysisResult => {
   const mockTargetAudiences = [
     "Small to medium businesses in e-commerce and retail",
     "Enterprise software development teams and IT departments",
     "Digital marketing agencies and consultants",
     "Healthcare providers and medical practices",
-    "Educational institutions and online learning platforms"
+    "Educational institutions and online learning platforms",
   ];
 
   const mockProblems = [
@@ -25,7 +27,7 @@ const generateMockAnalysis = (originalIdea: string): HorizontalAnalysisResult =>
     "Lack of real-time data visibility and actionable analytics",
     "Poor communication and collaboration between teams",
     "Difficulty in tracking and managing customer relationships",
-    "Complex workflow management and task coordination challenges"
+    "Complex workflow management and task coordination challenges",
   ];
 
   const mockSolutions = [
@@ -33,7 +35,7 @@ const generateMockAnalysis = (originalIdea: string): HorizontalAnalysisResult =>
     "Real-time dashboard with advanced analytics and predictive insights",
     "Integrated communication hub with project management capabilities",
     "Comprehensive CRM system with automated lead nurturing",
-    "Intelligent task management with resource allocation optimization"
+    "Intelligent task management with resource allocation optimization",
   ];
 
   const mockCompetitors = [
@@ -41,7 +43,7 @@ const generateMockAnalysis = (originalIdea: string): HorizontalAnalysisResult =>
     ["Microsoft Teams", "Slack", "Asana"],
     ["Tableau", "Power BI", "Looker"],
     ["Amazon Web Services", "Microsoft Azure", "Google Cloud"],
-    ["Shopify", "WooCommerce", "BigCommerce"]
+    ["Shopify", "WooCommerce", "BigCommerce"],
   ];
 
   const mockScalability = [
@@ -49,7 +51,7 @@ const generateMockAnalysis = (originalIdea: string): HorizontalAnalysisResult =>
     "Global expansion through multi-region cloud deployment",
     "Vertical market expansion with industry-specific modules",
     "API-first approach enabling third-party integrations and partnerships",
-    "White-label solutions for reseller and partner channels"
+    "White-label solutions for reseller and partner channels",
   ];
 
   const mockRevenueModels = [
@@ -57,35 +59,53 @@ const generateMockAnalysis = (originalIdea: string): HorizontalAnalysisResult =>
     "Tiered subscription pricing based on usage and features",
     "Per-seat pricing with volume discounts for enterprises",
     "Usage-based pricing with pay-as-you-scale model",
-    "Enterprise licensing with custom implementation services"
+    "Enterprise licensing with custom implementation services",
   ];
 
-  const innovationLevels: ("Low" | "Medium" | "High")[] = ["Low", "Medium", "High"];
-  
+  const innovationLevels: ("Low" | "Medium" | "High")[] = [
+    "Low",
+    "Medium",
+    "High",
+  ];
+
   // Simple scoring based on input length and keywords
   const inputLower = originalIdea.toLowerCase();
   let baseScore = 65;
-  
+
   if (inputLower.includes("ai") || inputLower.includes("ذكاء")) baseScore += 10;
-  if (inputLower.includes("automation") || inputLower.includes("أتمتة")) baseScore += 8;
-  if (inputLower.includes("cloud") || inputLower.includes("سحابة")) baseScore += 5;
+  if (inputLower.includes("automation") || inputLower.includes("أتمتة"))
+    baseScore += 8;
+  if (inputLower.includes("cloud") || inputLower.includes("سحابة"))
+    baseScore += 5;
   if (originalIdea.length > 100) baseScore += 5;
-  
-  const finalScore = Math.max(45, Math.min(95, baseScore + Math.floor(Math.random() * 10) - 5));
-  
+
+  const finalScore = Math.max(
+    45,
+    Math.min(95, baseScore + Math.floor(Math.random() * 10) - 5)
+  );
+
   return {
     id: `analysis_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`,
     timestamp: new Date().toISOString(),
     language: "en",
     originalIdea,
-    targetAudience: mockTargetAudiences[Math.floor(Math.random() * mockTargetAudiences.length)],
-    problemsSolved: mockProblems[Math.floor(Math.random() * mockProblems.length)],
-    proposedSolution: mockSolutions[Math.floor(Math.random() * mockSolutions.length)],
-    competitors: mockCompetitors[Math.floor(Math.random() * mockCompetitors.length)],
-    scalability: mockScalability[Math.floor(Math.random() * mockScalability.length)],
-    revenueModel: mockRevenueModels[Math.floor(Math.random() * mockRevenueModels.length)],
-    innovationLevel: innovationLevels[Math.floor(Math.random() * innovationLevels.length)],
-    overallScore: finalScore
+    targetAudience:
+      mockTargetAudiences[
+        Math.floor(Math.random() * mockTargetAudiences.length)
+      ],
+    problemsSolved:
+      mockProblems[Math.floor(Math.random() * mockProblems.length)],
+    proposedSolution:
+      mockSolutions[Math.floor(Math.random() * mockSolutions.length)],
+    competitors:
+      mockCompetitors[Math.floor(Math.random() * mockCompetitors.length)],
+    scalability:
+      mockScalability[Math.floor(Math.random() * mockScalability.length)],
+    revenueModel:
+      mockRevenueModels[Math.floor(Math.random() * mockRevenueModels.length)],
+    innovationLevel:
+      innovationLevels[Math.floor(Math.random() * innovationLevels.length)],
+    overallScore: finalScore,
   };
 };
 
@@ -93,7 +113,8 @@ const generateMockAnalysis = (originalIdea: string): HorizontalAnalysisResult =>
 const useSingleAnalysis = () => {
   const [input, setInput] = useState("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [currentResult, setCurrentResult] = useState<HorizontalAnalysisResult | null>(null);
+  const [currentResult, setCurrentResult] =
+    useState<HorizontalAnalysisResult | null>(null);
   const { toast } = useToast();
 
   const handleAnalyze = useCallback(async () => {
@@ -110,7 +131,7 @@ const useSingleAnalysis = () => {
     // Clear previous result
     setCurrentResult(null);
     setIsAnalyzing(true);
-    
+
     const endTiming = measureAnalysisTime();
     trackUserAction("single_analysis_started", {
       inputLength: input.length.toString(),
@@ -125,17 +146,17 @@ const useSingleAnalysis = () => {
       } catch (error) {
         console.log("No API key found, using mock analysis");
         const mockResult = generateMockAnalysis(input);
-        
+
         // Save to history
         analysisStorage.saveAnalysis(mockResult);
-        
+
         setCurrentResult(mockResult);
         setInput("");
         endTiming();
         trackUserAction("single_analysis_completed_mock");
 
         toast({
-          title: "Analysis Complete",
+          title: "Analysis Complete 🎉",
           description: "Your SaaS idea has been analyzed successfully",
         });
         return;
@@ -221,32 +242,40 @@ const useSingleAnalysis = () => {
         trackUserAction("single_analysis_completed_fallback");
 
         toast({
-          title: "Analysis Complete",
-          description: "Your SaaS idea has been analyzed successfully (fallback mode)",
+          title: "Analysis Complete 🎉",
+          description:
+            "Your SaaS idea has been analyzed successfully (fallback mode)",
         });
         return;
       }
 
       const newResult: HorizontalAnalysisResult = {
-        id: `analysis_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`,
+        id: `analysis_${Date.now()}_${Math.random()
+          .toString(36)
+          .substring(2, 11)}`,
         timestamp: new Date().toISOString(),
         language: "en",
         originalIdea: input,
         targetAudience: parsed.targetAudience || "Small to medium businesses",
-        problemsSolved: parsed.problemsSolved || "Efficiency and productivity challenges",
-        proposedSolution: parsed.proposedSolution || "Automated workflow solution",
-        competitors: Array.isArray(parsed.competitors) ? parsed.competitors : ["Generic competitors"],
+        problemsSolved:
+          parsed.problemsSolved || "Efficiency and productivity challenges",
+        proposedSolution:
+          parsed.proposedSolution || "Automated workflow solution",
+        competitors: Array.isArray(parsed.competitors)
+          ? parsed.competitors
+          : ["Generic competitors"],
         scalability: parsed.scalability || "Moderate scalability potential",
         revenueModel: parsed.revenueModel || "Subscription-based model",
         innovationLevel: parsed.innovationLevel || "Medium",
-        overallScore: typeof parsed.overallScore === "number"
-          ? Math.max(45, Math.min(95, parsed.overallScore))
-          : 70
+        overallScore:
+          typeof parsed.overallScore === "number"
+            ? Math.max(45, Math.min(95, parsed.overallScore))
+            : 70,
       };
 
       // Save to history
       analysisStorage.saveAnalysis(newResult);
-      
+
       setCurrentResult(newResult);
       setInput("");
       endTiming();
@@ -256,8 +285,9 @@ const useSingleAnalysis = () => {
       });
 
       toast({
-        title: "Analysis Complete",
-        description: "Your SaaS idea has been analyzed with comprehensive insights",
+        title: "Analysis Complete 🎉",
+        description:
+          "Your SaaS idea has been analyzed with comprehensive insights",
       });
     } catch (error) {
       console.error("Single analysis error:", error);

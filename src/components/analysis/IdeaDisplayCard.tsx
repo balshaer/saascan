@@ -158,7 +158,7 @@ const IdeaDisplayCard: React.FC<IdeaDisplayCardProps> = ({
                 className="w-4 h-4"
                 style={{ color: cssVars.textSecondary }}
               />
-              <span>Analysis Completed</span>
+              <span>Analysis Complete 🎉d</span>
             </div>
           </div>
         </CardContent>

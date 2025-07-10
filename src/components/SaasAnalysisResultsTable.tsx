@@ -466,7 +466,7 @@ const SaasAnalysisResultsTable: React.FC<SaasAnalysisResultsTableProps> = ({
                           <div className="space-y-4">
                             {result.summary && (
                               <div>
-                                <h4 className="font-semibold text-gray-900 mb-2">
+                                <h4 className="font-semibold  mb-2">
                                   📋 Executive Summary
                                 </h4>
                                 <p className="text-sm text-gray-700">
@@ -477,7 +477,7 @@ const SaasAnalysisResultsTable: React.FC<SaasAnalysisResultsTableProps> = ({
 
                             {result.detailedAnalysis?.recommendations && (
                               <div>
-                                <h4 className="font-semibold text-gray-900 mb-2">
+                                <h4 className="font-semibold  mb-2">
                                   💡 Key Recommendations
                                 </h4>
                                 <ul className="space-y-1">

@@ -1,14 +1,14 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  History, 
-  Trash2, 
-  Download, 
-  RefreshCw, 
-  CheckSquare, 
+import {
+  History,
+  Trash2,
+  Download,
+  RefreshCw,
+  CheckSquare,
   Square,
   AlertCircle,
-  FileText
+  FileText,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -38,7 +38,8 @@ const HistoryPage: React.FC = () => {
 
   const storageStats = getStorageStats();
   const hasSelectedItems = selectedItems.size > 0;
-  const allItemsSelected = history.length > 0 && selectedItems.size === history.length;
+  const allItemsSelected =
+    history.length > 0 && selectedItems.size === history.length;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -73,7 +74,10 @@ const HistoryPage: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6" dir="rtl">
+      <div
+        className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6"
+        dir="rtl"
+      >
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-center h-64">
             <motion.div
@@ -82,7 +86,9 @@ const HistoryPage: React.FC = () => {
             >
               <RefreshCw className="w-8 h-8 text-blue-600" />
             </motion.div>
-            <span className="mr-3 text-lg text-gray-600">جاري تحميل السجل...</span>
+            <span className="mr-3 text-lg text-gray-600">
+              جاري تحميل السجل...
+            </span>
           </div>
         </div>
       </div>
@@ -90,7 +96,10 @@ const HistoryPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6" dir="rtl">
+    <div
+      className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6"
+      dir="rtl"
+    >
       <motion.div
         className="max-w-7xl mx-auto space-y-6"
         variants={containerVariants}
@@ -101,7 +110,7 @@ const HistoryPage: React.FC = () => {
         <motion.div variants={itemVariants}>
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
+              <h1 className="text-3xl font-bold  flex items-center gap-3">
                 <History className="w-8 h-8 text-blue-600" />
                 سجل التحليلات
               </h1>
@@ -109,7 +118,7 @@ const HistoryPage: React.FC = () => {
                 إدارة وتصفح سجل تحليلات أفكار البرمجيات كخدمة
               </p>
             </div>
-            
+
             <div className="flex items-center gap-2">
               <Button
                 variant="outline"
@@ -120,7 +129,7 @@ const HistoryPage: React.FC = () => {
                 <Download className="w-4 h-4" />
                 تصدير السجل
               </Button>
-              
+
               {history.length > 0 && (
                 <Button
                   variant="destructive"
@@ -141,10 +150,16 @@ const HistoryPage: React.FC = () => {
           <Alert>
             <FileText className="h-4 w-4" />
             <AlertDescription className="text-right">
-              إجمالي التحليلات: {storageStats.totalAnalyses} | 
-              حجم البيانات: {storageStats.storageSize}
+              إجمالي التحليلات: {storageStats.totalAnalyses} | حجم البيانات:{" "}
+              {storageStats.storageSize}
               {storageStats.oldestAnalysis && (
-                <> | أقدم تحليل: {new Date(storageStats.oldestAnalysis).toLocaleDateString("ar-SA")}</>
+                <>
+                  {" "}
+                  | أقدم تحليل:{" "}
+                  {new Date(storageStats.oldestAnalysis).toLocaleDateString(
+                    "ar-SA"
+                  )}
+                </>
               )}
             </AlertDescription>
           </Alert>
@@ -181,14 +196,14 @@ const HistoryPage: React.FC = () => {
                       )}
                       {allItemsSelected ? "إلغاء تحديد الكل" : "تحديد الكل"}
                     </Button>
-                    
+
                     {hasSelectedItems && (
                       <span className="text-sm text-gray-600">
                         تم تحديد {selectedItems.size} عنصر
                       </span>
                     )}
                   </div>
-                  
+
                   {hasSelectedItems && (
                     <Button
                       variant="destructive"
@@ -225,7 +240,7 @@ const HistoryPage: React.FC = () => {
                         type: "spring",
                         stiffness: 200,
                         damping: 15,
-                        delay: 0.2
+                        delay: 0.2,
                       }}
                     >
                       <AlertCircle className="w-16 h-16 mx-auto mb-4 text-gray-400" />
@@ -237,7 +252,7 @@ const HistoryPage: React.FC = () => {
                       ابدأ بتحليل أفكار البرمجيات كخدمة لرؤية السجل هنا
                     </p>
                     <Button
-                      onClick={() => window.location.href = "/"}
+                      onClick={() => (window.location.href = "/")}
                       className="mt-4"
                     >
                       ابدأ التحليل الآن

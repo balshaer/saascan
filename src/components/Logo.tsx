@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function Logo() {
   return (
     <Link
-      to="/history"
+      to="/"
       aria-label="Go to history - SaaS Analyzer"
       className="inline-block cursor-pointer select-none group text-[var(--color-headline)] hover:text-[var(--color-accent)] transition-colors duration-300"
       tabIndex={0}
