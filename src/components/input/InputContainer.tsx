@@ -39,26 +39,12 @@ const InputContainer: React.FC<InputContainerProps> = ({
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <Card
-        className="border-0 overflow-hidden"
+        className="border-0 overflow-hidden px-0 "
         style={{ backgroundColor: `${cssVars.surface}CC` }}
       >
-        <CardHeader className="pb-4 relative z-10">
-          <motion.div
-            variants={headerVariants}
-            initial="initial"
-            animate="animate"
-            transition={{ delay: 0.2 }}
-          >
-            <CardTitle
-              className="flex items-center mx-auto gap-3 text-2xl"
-              style={{ color: cssVars.headline }}
-            >
-              {title}
-            </CardTitle>
-          </motion.div>
-        </CardHeader>
+    
 
-        <CardContent className="space-y-6 relative z-10">
+        <CardContent className="space-y-6 relative z-10 p-0">
           {React.Children.map(children, (child) => {
             if (React.isValidElement(child)) {
               return React.cloneElement(child, {

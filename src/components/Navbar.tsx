@@ -48,8 +48,8 @@ const Navbar = () => {
                     : "text-[var(--headline)] hover:bg-[var(--secondary)]/20"
                 }`}
               >
-                <ArrowUpRight />
                 Github
+                <ArrowUpRight />
               </Button>
             </Link>
           </div>

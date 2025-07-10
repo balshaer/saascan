@@ -57,7 +57,7 @@ export const cssVars = {
   borderFocus: "var(--highlight)",
 
   // Accent for active states
-  accent: "var(--highlight)",
+  accent: "var(--button)",
 } as const;
 
 // Helper function to create style objects with CSS variables

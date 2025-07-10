@@ -92,7 +92,6 @@ const AnalysisResult: React.FC<AnalysisResultProps> = ({
           variants={itemVariants}
         >
           <div className="flex items-center gap-2">
-            <FileText className="w-5 h-5 " />
             <h2 className="text-xl font-bold ">Idea Analysis Results</h2>
           </div>
 
@@ -110,13 +109,7 @@ const AnalysisResult: React.FC<AnalysisResultProps> = ({
         </motion.div>
 
         {/* Idea Display Card */}
-        <motion.div variants={itemVariants}>
-          <IdeaDisplayCard
-            originalIdea={result.originalIdea}
-            timestamp={result.timestamp}
-            overallScore={result.overallScore}
-          />
-        </motion.div>
+ 
 
         {/* Horizontal Analysis Table */}
         <motion.div variants={itemVariants}>
@@ -125,7 +118,7 @@ const AnalysisResult: React.FC<AnalysisResultProps> = ({
 
         {/* Tips Section */}
         <motion.div
-          className="bg-[var(--card)] border  rounded-[12px] p-4"
+          className="bg-[var(--card)] border border-[var(--border)]  rounded-[12px] p-4"
           variants={itemVariants}
         >
           <h3 className="font-semibold mb-2 flex items-center gap-2">

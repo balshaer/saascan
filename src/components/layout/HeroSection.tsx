@@ -1,15 +1,49 @@
 import React from "react";
 import { cssVars } from "../../utils/cssVariables";
 import { TextEffect } from "../ui/text-effect";
+import { RoughNotation } from "react-rough-notation";
+import { cn } from "@/lib/utils";
+import { AnimatedShinyText } from "@/components/magicui/animated-shiny-text";
+import gemini from "@/assets/gemini.svg";
 
 const HeroSection = () => {
   return (
     <div className="pt-12 text-center">
+      <div className="z-10 mb-6 flex items-center justify-center">
+        <div
+          className={cn(
+            "rounded-full border text-sm transition-all ease-in",
+            "border-[var(--border)] bg-[var(--card)] text-[var(--card-headline)]",
+            "dark:border-[var(--border)] dark:bg-[var(--card)]"
+          )}
+        >
+          <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-1 transition ease-out">
+            <span>Powered by Gemini</span>
+            <img
+              src={gemini}
+              alt="gemini"
+              className="ml-1 size-3 transition-transform duration-300 ease-in-out"
+            />
+          </AnimatedShinyText>
+        </div>
+      </div>
+
       <h1
-        className="text-4xl font-extrabold tracking-tight 2xs:text-5xl md:text-6xl lg:text-7xl"
+        className="text-4xl font-[500] tracking-tight 2xs:text-5xl md:text-6xl lg:text-7xl"
         style={{ color: cssVars.headline }}
       >
-        SaaS Idea Scanner
+        SaaS Idea{" "}
+        <RoughNotation
+          type="underline"
+          show={true}
+          color="var(--highlight)"
+          strokeWidth={5}
+          padding={[-14, 0]}
+          animationDuration={2500}
+          animationDelay={400}
+        >
+          <span>Scanner</span>
+        </RoughNotation>
         <span className="block">was never easier</span>
       </h1>
 

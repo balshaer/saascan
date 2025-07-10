@@ -2,7 +2,6 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { TextShimmer } from "@/components/ui/text-shimmer";
 import ClickSpark from "../ui/ClickSpark";
 
 interface AnalysisButtonProps {
@@ -43,7 +42,7 @@ const AnalysisButton: React.FC<AnalysisButtonProps> = ({
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="flex items-center gap-3"
+                  className="flex items-center gap-3 text-[var(--button-text)]"
                 >
                   Analyzing idea...
                 </motion.div>
@@ -53,7 +52,7 @@ const AnalysisButton: React.FC<AnalysisButtonProps> = ({
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 text-[var(--button-text)]"
                 >
                   Analyze SaaS Idea
                   <ArrowRight className="h-4 w-4" />

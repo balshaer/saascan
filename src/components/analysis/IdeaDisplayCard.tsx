@@ -60,7 +60,7 @@ const IdeaDisplayCard: React.FC<IdeaDisplayCardProps> = ({
       className={className}
     >
       <Card
-        className="w-full rounded-[12px] shadow-lg border-l-4"
+        className="w-full border-none"
         dir="ltr"
         style={{ borderLeftColor: cssVars.highlight }}
       >
@@ -85,7 +85,7 @@ const IdeaDisplayCard: React.FC<IdeaDisplayCardProps> = ({
           </div>
         </CardHeader>
 
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4 ">
           {/* Original Idea Text with Expandable Preview */}
           <div
             className="rounded-lg p-4 border-l-2"
@@ -95,13 +95,12 @@ const IdeaDisplayCard: React.FC<IdeaDisplayCardProps> = ({
             }}
           >
             <p
-              className="leading-relaxed text-base font-medium"
+              className="leading-relaxed text-base font-medium whitespace-normal break-words"
               style={{ color: cssVars.headline }}
             >
               {isExpanded ? originalIdea : truncateText(originalIdea)}
             </p>
 
-            {/* Toggle Button - Only show when text exceeds 180 characters */}
             {originalIdea.length > 180 && (
               <Button
                 variant="ghost"
@@ -133,32 +132,21 @@ const IdeaDisplayCard: React.FC<IdeaDisplayCardProps> = ({
 
           {/* Metadata */}
           <div
-            className="flex items-center justify-between text-sm pt-2 border-t"
+            className="flex items-center text-[var(--paragraph)]  justify-between text-sm pt-2 border-t"
             style={{
               color: cssVars.textSecondary,
               borderColor: cssVars.borderPrimary,
             }}
           >
-            <div className="flex items-center gap-2">
+            <div className="flex  items-center gap-2">
               <Calendar
                 className="w-4 h-4"
                 style={{ color: cssVars.textSecondary }}
               />
-              <span>Analysis Date:</span>
-              <span
-                className="font-medium"
-                style={{ color: cssVars.textPrimary }}
-              >
-                {formatDate(timestamp)}
+              <span className="text-[var(--paragraph)] font-medium">
+                Analysis Date:
               </span>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <Clock
-                className="w-4 h-4"
-                style={{ color: cssVars.textSecondary }}
-              />
-              <span>Analysis Complete 🎉d</span>
+              <span>{formatDate(timestamp)}</span>
             </div>
           </div>
         </CardContent>

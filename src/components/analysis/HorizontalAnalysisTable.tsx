@@ -16,6 +16,7 @@ import { HorizontalAnalysisResult } from "@/lib/uxAnalyzer";
 import { useTheme } from "../../themes";
 import { getThemeRiskColor, getThemeScoreColor } from "../../utils/themeUtils";
 import { cssVars } from "../../utils/cssVariables";
+import IdeaDisplayCard from "./IdeaDisplayCard";
 
 interface HorizontalAnalysisTableProps {
   result: HorizontalAnalysisResult;
@@ -139,6 +140,11 @@ const HorizontalAnalysisTable: React.FC<HorizontalAnalysisTableProps> = ({
       animate="visible"
     >
       <Card className="w-full shadow-lg" dir="ltr">
+        <IdeaDisplayCard
+          originalIdea={result.originalIdea}
+          timestamp={result.timestamp}
+          overallScore={result.overallScore}
+        />
         <CardHeader className="pb-4">
           <CardTitle
             className="text-xl font-bold flex items-center gap-2"

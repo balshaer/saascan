@@ -19,6 +19,7 @@ All colors MUST be HSL.
   --secondary: #72757e;
   --tertiary: #2cb67d;
   --card: #242629;
+  --border: #fcfcfc39;
 }
 
 /* Dark Theme */
@@ -40,7 +41,7 @@ All colors MUST be HSL.
   --tertiary: #2cb67d;
   --card: #202127;
   --card-border: #fcfcfc34;
-  --border: #fcfcfc34;
+  --border: #fcfcfc39;
   --card-headline: #dfdfd6;
   --card-paragraph: #98989f;
   --card-button: #3e63dd;
@@ -82,6 +83,9 @@ p {
 
   body {
     @apply bg-background text-foreground;
+  }
+  .theme {
+    --animate-shiny-text: shiny-text 8s infinite;
   }
 }
 
@@ -136,4 +140,33 @@ p {
 
 button {
   border-radius: 4px !important;
+}
+
+/* ---break---
+*/
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ---break---
+*/
+
+@theme inline {
+  @keyframes shiny-text {
+    0%,
+    90%,
+    100% {
+      background-position: calc(-100% - var(--shiny-width)) 0;
+    }
+    30%,
+    60% {
+      background-position: calc(100% + var(--shiny-width)) 0;
+    }
+  }
 }

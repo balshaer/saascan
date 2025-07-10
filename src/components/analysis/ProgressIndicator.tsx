@@ -1,5 +1,64 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+function WordRotate({ words, interval = 2500 }) {
+  const [index, setIndex] = useState(0);
+  const [fade, setFade] = useState(true);
+
+  useEffect(() => {
+    const fadeOutTimer = setTimeout(() => setFade(false), interval - 600);
+    const changeWordTimer = setTimeout(() => {
+      setIndex((prev) => (prev + 1) % words.length);
+      setFade(true);
+    }, interval);
+
+    return () => {
+      clearTimeout(fadeOutTimer);
+      clearTimeout(changeWordTimer);
+    };
+  }, [index, interval, words.length]);
+
+  return (
+    <span
+      style={{
+        transition: "opacity 0.6s ease-in-out",
+        opacity: fade ? 1 : 0,
+        display: "inline-block",
+        minWidth: "10ch",
+        fontWeight: "600",
+        fontSize: "1.3rem",
+        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+        color: "#2563eb", // Blue-600
+        textAlign: "center",
+      }}
+      aria-live="polite"
+    >
+      {words[index]}
+    </span>
+  );
+}
 
 export default function ProgressIndicator() {
-  return <div>loading</div>;
+  return (
+    <div
+      style={{
+        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+        fontSize: "1.5rem",
+        fontWeight: "700",
+        color: "#1e40af", // Blue-800
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "120px",
+        gap: "0.5rem",
+      }}
+      aria-label="Loading"
+      role="status"
+    >
+      Scanning{" "}
+      <WordRotate
+        words={["SaaS", "APIs", "Integrations", "Data", "Insights"]}
+      />
+      ...
+    </div>
+  );
 }

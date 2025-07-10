@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  IdeaInputForm,
-  AnalysisButton,
-  InputContainer,
-} from "@/components/input";
+import { IdeaInputForm, InputContainer } from "@/components/input";
 
 interface InputAnalysisSectionProps {
   input: string;
@@ -19,16 +15,12 @@ const InputAnalysisSection: React.FC<InputAnalysisSectionProps> = ({
   handleAnalyze,
 }) => {
   return (
-    <InputContainer  title="">
+    <InputContainer title="">
       <IdeaInputForm
         input={input}
         setInput={setInput}
         isAnalyzing={isAnalyzing}
-      />
-      <AnalysisButton
-        onClick={handleAnalyze}
-        isAnalyzing={isAnalyzing}
-        input={input}
+        handleAnalyze={handleAnalyze}
       />
     </InputContainer>
   );
