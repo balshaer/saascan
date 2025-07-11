@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { TextShimmer } from "../ui/text-shimmer";
 
 function WordRotate({ words, interval = 2500 }) {
   const [index, setIndex] = useState(0);
@@ -38,27 +39,5 @@ function WordRotate({ words, interval = 2500 }) {
 }
 
 export default function ProgressIndicator() {
-  return (
-    <div
-      style={{
-        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-        fontSize: "1.5rem",
-        fontWeight: "700",
-        color: "#1e40af", // Blue-800
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "120px",
-        gap: "0.5rem",
-      }}
-      aria-label="Loading"
-      role="status"
-    >
-      Scanning{" "}
-      <WordRotate
-        words={["SaaS", "APIs", "Integrations", "Data", "Insights"]}
-      />
-      ...
-    </div>
-  );
+  return <div></div>;
 }

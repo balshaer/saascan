@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import ClickSpark from "../ui/ClickSpark";
+import { TextShimmer } from "../ui/text-shimmer";
 
 interface AnalysisButtonProps {
   onClick: () => void;
@@ -17,51 +18,46 @@ const AnalysisButton: React.FC<AnalysisButtonProps> = ({
   input,
   disabled = false,
 }) => {
-  const isDisabled =
-    disabled || isAnalyzing || !input.trim() || input.length < 20;
+  const isDisabled = disabled || !input.trim() || input.length < 20;
 
   return (
     <div className="flex justify-center">
-      <motion.div
-        whileHover="hover"
-        whileTap="tap"
-        transition={{ type: "spring", stiffness: 400, damping: 17 }}
-      >
-        <ClickSpark
-          sparkColor="var(--button-text)"
-          sparkSize={10}
-          sparkRadius={15}
-          sparkCount={8}
-          duration={400}
-        >
-          <Button onClick={onClick} disabled={isDisabled} size="lg">
-            <AnimatePresence mode="wait">
-              {isAnalyzing ? (
-                <motion.div
-                  key="analyzing"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="flex items-center gap-3 text-[var(--button-text)]"
-                >
-                  Analyzing idea...
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="analyze"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="flex items-center gap-2 text-[var(--button-text)]"
-                >
+      <AnimatePresence mode="wait">
+        {isAnalyzing ? (
+          <motion.div
+            key="scanning"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <TextShimmer className="font-mono text-sm" duration={1}>
+              Scanning...
+            </TextShimmer>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="button"
+            whileHover="hover"
+            whileTap="tap"
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          >
+            <ClickSpark
+              sparkColor="var(--button-text)"
+              sparkSize={10}
+              sparkRadius={15}
+              sparkCount={8}
+              duration={400}
+            >
+              <Button onClick={onClick} disabled={isDisabled} size="lg">
+                <div className="flex items-center gap-2 text-[var(--button-text)]">
                   Analyze SaaS Idea
                   <ArrowRight className="h-4 w-4" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </Button>
-        </ClickSpark>
-      </motion.div>
+                </div>
+              </Button>
+            </ClickSpark>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

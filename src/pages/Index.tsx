@@ -52,75 +52,84 @@ const Index = () => {
   const hasResult = currentResult !== null;
 
   return (
-    <div
-      className="flex flex-col bg-[var(--background)] min-h-screen"
-      style={{
-        backgroundColor: cssVars.bgPrimary,
-      }}
-    >
-      <Navbar />
+    <>
+      {/* Background grid covering full viewport, behind everything */}
+      <div
+        className="fixed inset-0 -z-10"
+        style={{
+          backgroundColor: "var(--background)",
+          backgroundImage: `linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+                      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px)`,
+          backgroundSize: "14px 24px",
+        }}
+        aria-hidden="true"
+      />
 
-      <motion.main
-        className="container mx-auto px-4 py-8 space-y-8 flex-grow"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <motion.div variants={fadeInUp} initial="initial" animate="animate">
-          <HeroSection />
-        </motion.div>
+      <div className="flex flex-col min-h-screen relative ">
+        <Navbar />
 
-        <motion.div
-          className="grid grid-cols-1 gap-8"
-          variants={staggerContainer}
-          initial="initial"
-          animate="animate"
+        <motion.main
+          className="container mx-auto px-4 py-8 space-y-8 flex-grow"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
         >
-          <div className="space-y-6">
-            <motion.div variants={fadeInUp}>
-              <InputAnalysisSection
-                input={input}
-                setInput={setInput}
-                isAnalyzing={isAnalyzing}
-                handleAnalyze={handleAnalyze}
-              />
-            </motion.div>
+          <motion.div variants={fadeInUp} initial="initial" animate="animate">
+            <HeroSection />
+          </motion.div>
 
-            <AnimatePresence>
-              {isAnalyzing && (
-                <motion.div
-                  variants={fadeInUp}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                >
-                  <ProgressIndicator isAnalyzing={isAnalyzing} />
-                </motion.div>
-              )}
-            </AnimatePresence>
+          <motion.div
+            className="grid grid-cols-1 gap-8"
+            variants={staggerContainer}
+            initial="initial"
+            animate="animate"
+          >
+            <div className="space-y-6">
+              <motion.div variants={fadeInUp}>
+                <InputAnalysisSection
+                  input={input}
+                  setInput={setInput}
+                  isAnalyzing={isAnalyzing}
+                  handleAnalyze={handleAnalyze}
+                />
+              </motion.div>
 
-            <AnimatePresence mode="wait">
-              {hasResult && !isAnalyzing && currentResult && (
-                <motion.div
-                  key="results"
-                  variants={fadeInUp}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                >
-                  <AnalysisResult
-                    result={currentResult}
-                    onClear={clearResult}
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        </motion.div>
-      </motion.main>
+              <AnimatePresence>
+                {isAnalyzing && (
+                  <motion.div
+                    variants={fadeInUp}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                  >
+                    <ProgressIndicator isAnalyzing={isAnalyzing} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
-      <Footer />
-    </div>
+              <AnimatePresence mode="wait">
+                {hasResult && !isAnalyzing && currentResult && (
+                  <motion.div
+                    key="results"
+                    variants={fadeInUp}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                  >
+                    <AnalysisResult
+                      result={currentResult}
+                      onClear={clearResult}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </motion.div>
+        </motion.main>
+
+        <Footer />
+      </div>
+    </>
   );
 };
 

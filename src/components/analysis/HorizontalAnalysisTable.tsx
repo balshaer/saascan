@@ -98,7 +98,7 @@ const HorizontalAnalysisTable: React.FC<HorizontalAnalysisTableProps> = ({
       renderValue: (score: number) => (
         <div className="flex items-center gap-2">
           <Badge
-            className="font-bold text-lg px-3 py-1"
+            className="font-bold text-sm px-3 py-1"
             style={getScoreColorStyle(score)}
           >
             {score}/100
@@ -134,7 +134,7 @@ const HorizontalAnalysisTable: React.FC<HorizontalAnalysisTableProps> = ({
 
   return (
     <motion.div
-      className={className}
+      className={className  + "bg-[var(--card)]"}
       variants={containerVariants}
       initial="hidden"
       animate="visible"

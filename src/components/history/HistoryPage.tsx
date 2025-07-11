@@ -65,41 +65,27 @@ const HistoryPage: React.FC = () => {
   };
 
   const handleSelectAll = () => {
-    if (allItemsSelected) {
-      deselectAllItems();
-    } else {
-      selectAllItems();
-    }
+    allItemsSelected ? deselectAllItems() : selectAllItems();
   };
 
   if (isLoading) {
     return (
-      <div
-        className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6"
-        dir="rtl"
-      >
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-center h-64">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-            >
-              <RefreshCw className="w-8 h-8 text-blue-600" />
-            </motion.div>
-            <span className="mr-3 text-lg text-gray-600">
-              جاري تحميل السجل...
-            </span>
-          </div>
-        </div>
+      <div className="min-h-screen flex items-center justify-center bg-[var(--background)]">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+        >
+          <RefreshCw className="w-8 h-8 text-[var(--highlight)]" />
+        </motion.div>
+        <span className="ml-3 text-lg text-[var(--paragraph)]">
+          Loading history...
+        </span>
       </div>
     );
   }
 
   return (
-    <div
-      className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6"
-      dir="rtl"
-    >
+    <div className="min-h-screen p-6 bg-[var(--background)]">
       <motion.div
         className="max-w-7xl mx-auto space-y-6"
         variants={containerVariants}
@@ -110,12 +96,12 @@ const HistoryPage: React.FC = () => {
         <motion.div variants={itemVariants}>
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold  flex items-center gap-3">
-                <History className="w-8 h-8 text-blue-600" />
-                سجل التحليلات
+              <h1 className="text-3xl font-bold flex items-center gap-3 text-[var(--headline)]">
+                <History className="w-8 h-8 text-[var(--highlight)]" />
+                Analysis History
               </h1>
-              <p className="text-gray-600 mt-2">
-                إدارة وتصفح سجل تحليلات أفكار البرمجيات كخدمة
+              <p className="text-[var(--paragraph)] mt-2">
+                Manage and browse your SaaS idea analysis history.
               </p>
             </div>
 
@@ -124,10 +110,10 @@ const HistoryPage: React.FC = () => {
                 variant="outline"
                 size="sm"
                 onClick={exportHistory}
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 border-[var(--border)] text-[var(--headline)] hover:bg-[var(--button-hover)]"
               >
                 <Download className="w-4 h-4" />
-                تصدير السجل
+                Export History
               </Button>
 
               {history.length > 0 && (
@@ -135,10 +121,10 @@ const HistoryPage: React.FC = () => {
                   variant="destructive"
                   size="sm"
                   onClick={clearAllHistory}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 bg-[var(--button)] text-[var(--button-text)] hover:bg-[var(--button-hover)]"
                 >
                   <Trash2 className="w-4 h-4" />
-                  مسح الكل
+                  Clear All
                 </Button>
               )}
             </div>
@@ -147,18 +133,16 @@ const HistoryPage: React.FC = () => {
 
         {/* Storage Stats */}
         <motion.div variants={itemVariants}>
-          <Alert>
-            <FileText className="h-4 w-4" />
-            <AlertDescription className="text-right">
-              إجمالي التحليلات: {storageStats.totalAnalyses} | حجم البيانات:{" "}
+          <Alert className="bg-[var(--card)] border border-[var(--card-border)] text-[var(--card-paragraph)]">
+            <FileText className="h-4 w-4 text-[var(--highlight)]" />
+            <AlertDescription>
+              Total analyses: {storageStats.totalAnalyses} | Storage size:{" "}
               {storageStats.storageSize}
               {storageStats.oldestAnalysis && (
                 <>
                   {" "}
-                  | أقدم تحليل:{" "}
-                  {new Date(storageStats.oldestAnalysis).toLocaleDateString(
-                    "ar-SA"
-                  )}
+                  | Oldest analysis:{" "}
+                  {new Date(storageStats.oldestAnalysis).toLocaleDateString()}
                 </>
               )}
             </AlertDescription>
@@ -179,7 +163,7 @@ const HistoryPage: React.FC = () => {
         {/* Bulk Actions */}
         {history.length > 0 && (
           <motion.div variants={itemVariants}>
-            <Card>
+            <Card className="bg-[var(--card)] border border-[var(--card-border)]">
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
@@ -187,19 +171,19 @@ const HistoryPage: React.FC = () => {
                       variant="outline"
                       size="sm"
                       onClick={handleSelectAll}
-                      className="flex items-center gap-2"
+                      className="flex items-center gap-2 border-[var(--border)] text-[var(--headline)]"
                     >
                       {allItemsSelected ? (
                         <CheckSquare className="w-4 h-4" />
                       ) : (
                         <Square className="w-4 h-4" />
                       )}
-                      {allItemsSelected ? "إلغاء تحديد الكل" : "تحديد الكل"}
+                      {allItemsSelected ? "Deselect All" : "Select All"}
                     </Button>
 
                     {hasSelectedItems && (
-                      <span className="text-sm text-gray-600">
-                        تم تحديد {selectedItems.size} عنصر
+                      <span className="text-sm text-[var(--paragraph)]">
+                        {selectedItems.size} item(s) selected
                       </span>
                     )}
                   </div>
@@ -209,10 +193,10 @@ const HistoryPage: React.FC = () => {
                       variant="destructive"
                       size="sm"
                       onClick={deleteSelectedAnalyses}
-                      className="flex items-center gap-2"
+                      className="flex items-center gap-2 bg-[var(--button)] text-[var(--button-text)] hover:bg-[var(--button-hover)]"
                     >
                       <Trash2 className="w-4 h-4" />
-                      حذف المحدد ({selectedItems.size})
+                      Delete Selected ({selectedItems.size})
                     </Button>
                   )}
                 </div>
@@ -231,7 +215,7 @@ const HistoryPage: React.FC = () => {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.5 }}
               >
-                <Card className="w-full">
+                <Card className="w-full bg-[var(--card)] border border-[var(--card-border)]">
                   <CardContent className="p-12 text-center">
                     <motion.div
                       initial={{ scale: 0 }}
@@ -243,26 +227,26 @@ const HistoryPage: React.FC = () => {
                         delay: 0.2,
                       }}
                     >
-                      <AlertCircle className="w-16 h-16 mx-auto mb-4 text-gray-400" />
+                      <AlertCircle className="w-16 h-16 mx-auto mb-4 text-[var(--secondary)]" />
                     </motion.div>
-                    <h3 className="text-xl font-semibold text-gray-600 mb-2">
-                      لا توجد تحليلات في السجل
+                    <h3 className="text-xl font-semibold text-[var(--headline)] mb-2">
+                      No analyses found
                     </h3>
-                    <p className="text-gray-500 mb-4">
-                      ابدأ بتحليل أفكار البرمجيات كخدمة لرؤية السجل هنا
+                    <p className="text-[var(--paragraph)] mb-4">
+                      Start analyzing SaaS ideas to see them here.
                     </p>
                     <Button
                       onClick={() => (window.location.href = "/")}
-                      className="mt-4"
+                      className="mt-4 bg-[var(--button)] text-[var(--button-text)] hover:bg-[var(--button-hover)]"
                     >
-                      ابدأ التحليل الآن
+                      Start Analysis
                     </Button>
                   </CardContent>
                 </Card>
               </motion.div>
             ) : (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {history.map((item, index) => (
+                {history.map((item) => (
                   <HistoryCard
                     key={item.id}
                     item={item}

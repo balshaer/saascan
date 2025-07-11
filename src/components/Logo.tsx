@@ -6,7 +6,7 @@ export default function Logo() {
     <Link
       to="/"
       aria-label="Go to history - SaaS Analyzer"
-      className="inline-block cursor-pointer select-none group text-[var(--color-headline)] hover:text-[var(--color-accent)] transition-colors duration-300"
+      className="inline-block cursor-pointer select-none text-[var(--color-headline)]"
       tabIndex={0}
     >
       <svg
@@ -15,7 +15,6 @@ export default function Logo() {
         viewBox="0 0 120 120"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="transition-transform duration-300 ease-in-out group-hover:scale-110 group-focus:scale-110"
         aria-hidden="true"
       >
         <circle

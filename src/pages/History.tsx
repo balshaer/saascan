@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import HistoryPage from "@/components/history/HistoryPage";
+import HistoryPage from "./HistoryPage";
 
 const History: React.FC = () => {
   return (

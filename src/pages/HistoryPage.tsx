@@ -38,14 +38,17 @@ const HistoryPage = () => {
   };
 
   return (
-    <div
-      className="flex flex-col min-h-screen"
-      style={{
-        background: `linear-gradient(to bottom right, var(--background), var(--secondary)/10, var(--highlight)/5)`,
-      }}
-    >
-      <Navbar />
-
+    <div className="flex flex-col min-h-screen">
+      <div
+        className="fixed inset-0 -z-10"
+        style={{
+          backgroundColor: "var(--background)",
+          backgroundImage: `linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+                      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px)`,
+          backgroundSize: "14px 24px",
+        }}
+        aria-hidden="true"
+      />
       <main className="container mx-auto px-4 py-8 space-y-8 flex-grow">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -56,20 +59,11 @@ const HistoryPage = () => {
             <CardHeader>
               <CardTitle className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => navigate("/")}
-                    className="flex items-center gap-2"
-                  >
-                    <ArrowLeft className="w-4 h-4" />
-                    Back Home
-                  </Button>
                   <h1 className="text-2xl font-bold">Analysis History</h1>
                 </div>
                 <div className="flex gap-2">
                   <Button
-                    variant="outline"
+                    variant="secondary"
                     onClick={handleExport}
                     className="flex items-center gap-2"
                   >
@@ -77,16 +71,10 @@ const HistoryPage = () => {
                     Export
                   </Button>
                   <Button
-                    variant="outline"
+                    variant="danger"
                     onClick={handleClear}
                     className="flex items-center gap-2"
-                    style={{ color: "#ef4444" }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.color = "#dc2626")
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.color = "#ef4444")
-                    }
+                
                   >
                     <Trash2 className="w-4 h-4" />
                     Clear All
@@ -109,7 +97,6 @@ const HistoryPage = () => {
         </motion.div>
       </main>
 
-      <Footer />
     </div>
   );
 };

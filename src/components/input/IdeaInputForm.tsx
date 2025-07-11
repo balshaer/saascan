@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { EnhancedTextarea } from "@/components/ui/textarea";
+import React, { useState, useRef, useEffect } from "react";
 import InputValidation from "@/components/analysis/InputValidation";
 import { AnalysisButton } from "@/components/input";
 import { cssVars } from "../../utils/cssVariables";
 import { WordRotate } from "../ui/WordRotate";
+import { BorderTrail } from "../ui/border-trail";
 
 interface IdeaInputFormProps {
   input: string;
@@ -23,6 +23,7 @@ const IdeaInputForm: React.FC<IdeaInputFormProps> = ({
   onBlur,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -34,11 +35,36 @@ const IdeaInputForm: React.FC<IdeaInputFormProps> = ({
     onBlur?.();
   };
 
+  useEffect(() => {
+    if (!textareaRef.current) return;
+    const textarea = textareaRef.current;
+    textarea.style.height = "auto";
+    const newHeight = Math.min(Math.max(textarea.scrollHeight, 80), 300);
+    textarea.style.height = `${newHeight}px`;
+  }, [input]);
+
   return (
-    <div className="relative space-y-3">
+    <div
+      className={`relative w-full bg-[var(--card)] rounded-[12px] transition-all duration-300 p-4`}
+      style={{
+        boxShadow: isFocused
+          ? "0px 0px 60px 30px rgb(255 255 255 / 50%), 0 0 100px 60px rgb(0 0 0 / 50%), 0 0 140px 90px rgb(0 0 0 / 50%)"
+          : "none",
+      }}
+    >
+      {isFocused && (
+        <BorderTrail
+          size={100}
+          style={{
+            boxShadow:
+              "0px 0px 60px 30px rgb(255 255 255 / 50%), 0 0 100px 60px rgb(0 0 0 / 50%), 0 0 140px 90px rgb(0 0 0 / 50%)",
+          }}
+        />
+      )}
+
       {input.length === 0 && !isFocused && (
         <div
-          className="pointer-events-none absolute left-4  top-4 text-base opacity-80 transition-all duration-300"
+          className="pointer-events-none absolute left-2 top-2 text-base opacity-80 transition-all duration-300"
           style={{ color: cssVars.paragraph }}
         >
           <WordRotate
@@ -54,27 +80,26 @@ const IdeaInputForm: React.FC<IdeaInputFormProps> = ({
         </div>
       )}
 
-      <EnhancedTextarea
+      <textarea
+        ref={textareaRef}
         value={input}
-        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-          setInput(e.target.value)
-        }
+        onChange={(e) => setInput(e.target.value)}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        autoResize={true}
-        className="h-full min-h-[10px] border-none w-full text-[var(--card-headline)] rounded-[12px] text-base transition-all duration-300"
         disabled={isAnalyzing}
-      >
-        <div className="flex justify-between p-4 items-center">
-          <InputValidation input={input} isAnalyzing={isAnalyzing} />
+        className="w-full bg-transparent resize-none outline-none border-none text-[var(--card-headline)] text-base"
+        rows={1}
+        style={{ minHeight: "40px" }}
+      />
 
-          <AnalysisButton
-            onClick={handleAnalyze}
-            isAnalyzing={isAnalyzing}
-            input={input}
-          />
-        </div>
-      </EnhancedTextarea>
+      <div className="flex justify-between items-center mt-4">
+        <InputValidation input={input} isAnalyzing={isAnalyzing} />
+        <AnalysisButton
+          onClick={handleAnalyze}
+          isAnalyzing={isAnalyzing}
+          input={input}
+        />
+      </div>
     </div>
   );
 };
