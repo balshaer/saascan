@@ -74,7 +74,6 @@ const HistoryPage = () => {
                     variant="danger"
                     onClick={handleClear}
                     className="flex items-center gap-2"
-                
                   >
                     <Trash2 className="w-4 h-4" />
                     Clear All
@@ -96,7 +95,6 @@ const HistoryPage = () => {
           </Card>
         </motion.div>
       </main>
-
     </div>
   );
 };

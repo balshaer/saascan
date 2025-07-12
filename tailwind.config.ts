@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import type { Config } from "tailwindcss";
 
 export default {
@@ -97,10 +98,15 @@ export default {
             height: "0",
           },
         },
+        "loading-wave": {
+          "0%, 100%": { height: "0.625rem" }, // 10px
+          "50%": { height: "3.125rem" }, // 50px
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "loading-wave": "loading-wave 1s ease-in-out infinite",
       },
     },
   },
