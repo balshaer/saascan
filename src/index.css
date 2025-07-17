@@ -1,0 +1,198 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+/* Light Theme */
+:root {
+  --background: #fdfdfd;
+  --navbar: #ffffff;
+  --headline: #1c1c1f;
+  --paragraph: #4b4b51;
+  --button: #3e63dd;
+  --button-text: #ffffff;
+  --button-hover: #274bc9;
+  --button-secondary: #e9e9ee;
+  --button-secondary-text: #1c1c1f;
+  --button-secondary-hover: #d9d9e0;
+  --stroke: #e0e0e0;
+  --main: #1c1c1f;
+  --highlight: #7f5af0;
+  --secondary: #72757e;
+  --tertiary: #2cb67d;
+  --card: #ffffff;
+  --card-border: #dcdcdc;
+  --border: #dcdcdc;
+  --card-headline: #1c1c1f;
+  --card-paragraph: #4b4b51;
+  --card-button: #3e63dd;
+  --card-button-text: #ffffff;
+  --card-stroke: #e0e0e0;
+  --card-main: #1c1c1f;
+  --card-highlight: #7f5af0;
+  --grid-line: #1c1c1f0a;
+  --danger: #e5484d;
+  --danger-text: #ffffff;
+  --danger-hover: #c72f32;
+}
+
+/* Dark Theme */
+[data-theme='dark'] {
+  --background: #1b1b1f;
+  --navbar: #202127;
+  --headline: #dfdfd6;
+  --paragraph: #98989f;
+  --button: #3e63dd;
+  --button-text: #ffff;
+  --button-hover: #002cbd;
+  --button-secondary: #32363f;
+  --button-secondary-text: #dfdfd6;
+  --button-secondary-hover: #414853;
+  --button-text: #fffffe;
+  --stroke: #010101;
+  --main: #fffffe;
+  --highlight: #7f5af0;
+  --secondary: #72757e;
+  --tertiary: #2cb67d;
+  --card: #202127;
+  --card-border: #fcfcfc34;
+  --border: #fcfcfc39;
+  --card-headline: #dfdfd6;
+  --card-paragraph: #98989f;
+  --card-button: #3e63dd;
+  --card-button-text: #fffffe;
+  --card-stroke: #010101;
+  --card-main: #fffffe;
+  --card-highlight: #7f5af0;
+  --highlight: #7f5af0;
+  --grid-line: #80808019;
+  --danger: #e5484d;
+  --danger-text: #ffffff;
+  --danger-hover: #c72f32;
+}
+
+body {
+  color: var(--headline);
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+* {
+  transition:
+    background-color 0.3s,
+    color 0.3s,
+    border-color 0.3s;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply text-[var(--headline)];
+}
+
+p {
+  @apply text-[var(--paragraph)];
+}
+
+@layer base {
+  * {
+    font-family: 'Chillax', monospace;
+    border-color: var(--border);
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+  .theme {
+    --animate-shiny-text: shiny-text 8s infinite;
+  }
+}
+
+/* Enhanced animations and transitions */
+@layer utilities {
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 3s ease infinite;
+  }
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .glass-effect {
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  /* Custom scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--highlight);
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--tertiary);
+  }
+}
+
+.hoverd {
+  transition: all 0.3s ease 0s !important;
+}
+
+button {
+  border-radius: 4px !important;
+}
+
+/* ---break---
+*/
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ---break---
+*/
+
+@theme inline {
+  @keyframes shiny-text {
+    0%,
+    90%,
+    100% {
+      background-position: calc(-100% - var(--shiny-width)) 0;
+    }
+    30%,
+    60% {
+      background-position: calc(100% + var(--shiny-width)) 0;
+    }
+  }
+}
