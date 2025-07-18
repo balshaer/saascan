@@ -108,7 +108,7 @@ p {
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-paragraph;
   }
   .theme {
     --animate-shiny-text: shiny-text 8s infinite;
@@ -176,7 +176,7 @@ button {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-paragraph;
   }
 }
 

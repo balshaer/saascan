@@ -20,61 +20,49 @@ export default {
     },
     extend: {
       colors: {
-        // Tailwind semantic colors
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
+        background: 'var(--background)',
+        navbar: 'var(--navbar)',
+        headline: 'var(--headline)',
+        paragraph: 'var(--paragraph)',
+        main: 'var(--main)',
+
+        border: 'var(--border)',
+        input: 'var(--stroke)',
+        ring: 'var(--highlight)',
+        accent: 'var(--highlight)',
+        muted: 'var(--secondary)',
+        tertiary: 'var(--tertiary)',
+        gridline: 'var(--grid-line)',
+
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
+          DEFAULT: 'var(--button)',
+          foreground: 'var(--button-text)',
+          hover: 'var(--button-hover)',
         },
+
         secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
+          DEFAULT: 'var(--button-secondary)',
+          foreground: 'var(--button-secondary-text)',
+          hover: 'var(--button-secondary-hover)',
         },
+
         destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))',
+          DEFAULT: 'var(--danger)',
+          foreground: 'var(--danger-text)',
+          hover: 'var(--danger-hover)',
         },
-        muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
-        },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
-        },
-        popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
-        },
+
         card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
+          DEFAULT: 'var(--card)',
+          border: 'var(--card-border)',
+          foreground: 'var(--card-main)',
+          headline: 'var(--card-headline)',
+          paragraph: 'var(--card-paragraph)',
+          button: 'var(--card-button)',
+          'button-text': 'var(--card-button-text)',
+          stroke: 'var(--card-stroke)',
+          highlight: 'var(--card-highlight)',
         },
-        sidebar: {
-          DEFAULT: 'hsl(var(--sidebar-background))',
-          foreground: 'hsl(var(--sidebar-foreground))',
-          primary: 'hsl(var(--sidebar-primary))',
-          'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-          accent: 'hsl(var(--sidebar-accent))',
-          'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-          border: 'hsl(var(--sidebar-border))',
-          ring: 'hsl(var(--sidebar-ring))',
-        },
-        // Custom theme colors from themes.css
-        'theme-background': 'var(--background)',
-        'theme-headline': 'var(--headline)',
-        'theme-paragraph': 'var(--paragraph)',
-        'theme-button': 'var(--button)',
-        'theme-button-text': 'var(--button-text)',
-        'theme-stroke': 'var(--stroke)',
-        'theme-main': 'var(--main)',
-        'theme-highlight': 'var(--highlight)',
-        'theme-secondary': 'var(--secondary)',
-        'theme-tertiary': 'var(--tertiary)',
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -83,24 +71,16 @@ export default {
       },
       keyframes: {
         'accordion-down': {
-          from: {
-            height: '0',
-          },
-          to: {
-            height: 'var(--radix-accordion-content-height)',
-          },
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
         },
         'accordion-up': {
-          from: {
-            height: 'var(--radix-accordion-content-height)',
-          },
-          to: {
-            height: '0',
-          },
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
         },
         'loading-wave': {
-          '0%, 100%': { height: '0.625rem' }, // 10px
-          '50%': { height: '3.125rem' }, // 50px
+          '0%, 100%': { height: '0.625rem' },
+          '50%': { height: '3.125rem' },
         },
       },
       animation: {

@@ -1,19 +1,21 @@
-import { Toaster as Sonner } from '@/components/ui/sonner';
-import { Toaster } from '@/components/ui/toaster';
-import { TooltipProvider } from '@/components/ui/tooltip';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import React from 'react';
+import React, { memo, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import ErrorBoundary from './components/ErrorBoundary';
+import { Toaster } from 'sonner';
+import ErrorBoundary from './core/components/global/ErrorBoundary';
+import { TooltipProvider } from './core/components/ui/tooltip';
 import { performanceMonitor } from './lib/performance';
-import AppRoutes from './routes/__routes';
+import AppRoutes from './routes';
 import { ThemeProvider } from './themes/ThemeProvider';
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: (failureCount, error: any) => {
-        if (error?.status >= 400 && error?.status < 500) return false;
+      retry: (failureCount, error: unknown) => {
+        if (typeof error === 'object' && error !== null && 'status' in error) {
+          const status = (error as { status?: number }).status;
+          if (typeof status === 'number' && status >= 400 && status < 500) return false;
+        }
         return failureCount < 3;
       },
       staleTime: 5 * 60 * 1000,
@@ -25,8 +27,8 @@ const queryClient = new QueryClient({
   },
 });
 
-const App = () => {
-  React.useEffect(() => {
+const App: React.FC = memo(() => {
+  useEffect(() => {
     performanceMonitor.recordMetric('app_initialized', performance.now(), 'timing');
   }, []);
 
@@ -36,7 +38,6 @@ const App = () => {
         <QueryClientProvider client={queryClient}>
           <TooltipProvider>
             <Toaster />
-            <Sonner />
             <BrowserRouter>
               <AppRoutes />
             </BrowserRouter>
@@ -45,6 +46,6 @@ const App = () => {
       </ThemeProvider>
     </ErrorBoundary>
   );
-};
+});
 
 export default App;
