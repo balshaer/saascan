@@ -53,6 +53,7 @@
     "framer-motion": "^12.23.0",
     "html2pdf.js": "^0.10.3",
     "input-otp": "^1.2.4",
+    "js-cookie": "^3.0.5",
     "jspdf": "^3.0.1",
     "lucide-react": "^0.462.0",
     "motion": "^12.23.3",

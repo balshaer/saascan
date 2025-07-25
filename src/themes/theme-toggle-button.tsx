@@ -7,7 +7,7 @@ import React from 'react';
 
 import { AnimationStart, AnimationVariant, createAnimation } from './theme-animations';
 
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/core/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface ThemeToggleAnimationProps {
   variant?: AnimationVariant;
@@ -83,7 +83,7 @@ export function ThemeToggleButton({
             }
           }}
         >
-          <Expand toggled={isDark} duration={750} />
+          <Expand toggled={isDark} duration={750} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
         </button>
       </TooltipTrigger>
       <TooltipContent side="top">{isDark ? 'Dark Mode' : 'Light Mode'}</TooltipContent>

@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -12,7 +17,7 @@ All colors MUST be HSL.
   --navbar: #ffffff;
   --headline: #1c1c1f;
   --paragraph: #4b4b51;
-  --button: #3e63dd;
+  --button: #7E5AF0;
   --button-text: #ffffff;
   --button-hover: #274bc9;
   --button-secondary: #e9e9ee;
@@ -28,7 +33,7 @@ All colors MUST be HSL.
   --border: #dcdcdc;
   --card-headline: #1c1c1f;
   --card-paragraph: #4b4b51;
-  --card-button: #3e63dd;
+  --card-button: #7E5AF0;
   --card-button-text: #ffffff;
   --card-stroke: #e0e0e0;
   --card-main: #1c1c1f;
@@ -37,6 +42,7 @@ All colors MUST be HSL.
   --danger: #e5484d;
   --danger-text: #ffffff;
   --danger-hover: #c72f32;
+  --radius: 12px
 }
 
 /* Dark Theme */
@@ -45,7 +51,7 @@ All colors MUST be HSL.
   --navbar: #202127;
   --headline: #dfdfd6;
   --paragraph: #98989f;
-  --button: #3e63dd;
+  --button: #7E5AF0;
   --button-text: #ffff;
   --button-hover: #002cbd;
   --button-secondary: #32363f;
@@ -62,7 +68,7 @@ All colors MUST be HSL.
   --border: #fcfcfc39;
   --card-headline: #dfdfd6;
   --card-paragraph: #98989f;
-  --card-button: #3e63dd;
+  --card-button: #7E5AF0;
   --card-button-text: #fffffe;
   --card-stroke: #010101;
   --card-main: #fffffe;
@@ -72,6 +78,7 @@ All colors MUST be HSL.
   --danger: #e5484d;
   --danger-text: #ffffff;
   --danger-hover: #c72f32;
+  --radius: 12px
 }
 
 body {
@@ -103,13 +110,15 @@ p {
 
 @layer base {
   * {
-    font-family: 'Chillax', monospace;
+  font-family: "IBM Plex Sans", sans-serif !important;
+
     border-color: var(--border);
   }
 
   body {
     @apply bg-background text-paragraph;
   }
+
   .theme {
     --animate-shiny-text: shiny-text 8s infinite;
   }
@@ -126,9 +135,11 @@ p {
     0% {
       background-position: 0% 50%;
     }
+
     50% {
       background-position: 100% 50%;
     }
+
     100% {
       background-position: 0% 50%;
     }
@@ -175,6 +186,7 @@ button {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-paragraph;
   }
@@ -185,14 +197,94 @@ button {
 
 @theme inline {
   @keyframes shiny-text {
+
     0%,
     90%,
     100% {
       background-position: calc(-100% - var(--shiny-width)) 0;
     }
+
     30%,
     60% {
       background-position: calc(100% + var(--shiny-width)) 0;
     }
+  }
+}
+
+/* Toast (cookie consent) styles */
+.cookie-toast {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 9999;
+  min-width: 280px;
+  max-width: 90vw;
+  background: var(--card);
+  color: var(--headline);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.12);
+  padding: 1.25rem 1.5rem 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  animation: slideInUp 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cookie-toast-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.cookie-toast-desc {
+  font-size: 0.95rem;
+  color: var(--paragraph);
+}
+
+.cookie-toast-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+.cookie-toast-btn {
+  padding: 0.5rem 1.25rem;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.cookie-toast-btn.allow {
+  background: var(--button);
+  color: var(--button-text);
+}
+
+.cookie-toast-btn.deny {
+  background: var(--button-secondary);
+  color: var(--button-secondary-text);
+}
+
+@media (max-width: 600px) {
+  .cookie-toast {
+    right: 0.5rem;
+    left: 0.5rem;
+    bottom: 0.5rem;
+    min-width: unset;
+    max-width: unset;
+    padding: 1rem 1rem 0.75rem 1rem;
   }
 }
