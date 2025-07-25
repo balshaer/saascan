@@ -9,6 +9,7 @@ import Footer from '../components/common/Footer';
 import Navbar from '../components/common/Navbar';
 import HeroSection from '../components/layout/HeroSection';
 import InputAnalysisSection from '../components/layout/InputAnalysisSection';
+import { analysisStorage } from '../lib/analysisStorage';
 
 const fadeInUp: Variants = {
   initial: { opacity: 0, y: 20 },
@@ -24,14 +25,23 @@ const staggerContainer: Variants = {
 
 const Index: React.FC = memo(() => {
   const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const [cookieConsent, setCookieConsent] = useState<boolean | null>(null);
+  const [showDialog, setShowDialog] = useState(false);
 
   const { input, setInput, isAnalyzing, currentResult, handleAnalyze, clearResult } =
     useSingleAnalysis();
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsFirstLoad(false), 500);
-    return () => clearTimeout(timer);
+    const consent = analysisStorage.getCookieConsent();
+    setCookieConsent(consent);
+    if (consent === null) setShowDialog(true);
   }, []);
+
+  const handleConsent = (granted: boolean) => {
+    analysisStorage.setCookieConsent(granted);
+    setCookieConsent(granted);
+    setShowDialog(false);
+  };
 
   const hasResult = currentResult !== null;
 
@@ -47,12 +57,26 @@ const Index: React.FC = memo(() => {
           backgroundSize: '14px 24px',
         }}
       />
-
       <div className="flex flex-col min-h-screen relative">
+        {showDialog && (
+          <div className="cookie-toast">
+            <div className="cookie-toast-title">Allow Cookies?</div>
+            <div className="cookie-toast-desc">
+              We use browser cookies to save your SaaS analysis history.<br/> Do you allow us to store your results in your browser?
+            </div>
+            <div className="cookie-toast-actions">
+              <button className="cookie-toast-btn allow" onClick={() => handleConsent(true)}>
+                Allow
+              </button>
+              <button className="cookie-toast-btn deny" onClick={() => handleConsent(false)}>
+                Deny
+              </button>
+            </div>
+          </div>
+        )}
         <Navbar />
-
         <motion.main
-          className="container mx-auto px-4 py-8 space-y-8 flex-grow"
+          className="container mx-auto  py-8 space-y-8 flex-grow"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
@@ -60,7 +84,6 @@ const Index: React.FC = memo(() => {
           <motion.div variants={fadeInUp} initial="initial" animate="animate">
             <HeroSection />
           </motion.div>
-
           <motion.div
             className="grid grid-cols-1 gap-8"
             variants={staggerContainer}
@@ -76,7 +99,6 @@ const Index: React.FC = memo(() => {
                   handleAnalyze={handleAnalyze}
                 />
               </motion.div>
-
               <AnimatePresence>
                 {isAnalyzing && (
                   <motion.div variants={fadeInUp} initial="initial" animate="animate" exit="exit">
@@ -84,7 +106,6 @@ const Index: React.FC = memo(() => {
                   </motion.div>
                 )}
               </AnimatePresence>
-
               <AnimatePresence mode="wait">
                 {hasResult && !isAnalyzing && currentResult && (
                   <motion.div
@@ -101,7 +122,6 @@ const Index: React.FC = memo(() => {
             </div>
           </motion.div>
         </motion.main>
-
         <Footer />
       </div>
     </>

@@ -97,30 +97,7 @@ const Navbar: React.FC<NavbarProps> = memo(({ onExport, onClear, resultsLength }
         </div>
       </div>
 
-      {/* For History page, show export & clear buttons below logo on mobile */}
-      {isHistoryPage && (
-        <div className="container mx-auto px-4 pb-4 md:hidden flex gap-2 justify-center">
-          <Button
-            variant="secondary"
-            onClick={onExport}
-            disabled={isDisabled}
-            className="flex items-center gap-2 whitespace-nowrap"
-          >
-            <Download className="w-4 h-4" />
-            Export
-          </Button>
-          <Button
-            variant="destructive"
-            onClick={onClear}
-            disabled={isDisabled}
-            className="flex items-center gap-2 whitespace-nowrap"
-          >
-            <Trash2 className="w-4 h-4" />
-            Clear All
-          </Button>
-        </div>
-      )}
-
+ 
       <AnimatePresence>
         {menuOpen && (
           <motion.div
